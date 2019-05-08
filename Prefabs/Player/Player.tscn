@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Prefabs/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/ImageTextures/Player/Left_LEG.png" type="Texture" id=2]
+[ext_resource path="res://Assets/ImageTextures/Player/Right_LEG.png" type="Texture" id=3]
+[ext_resource path="res://Assets/ImageTextures/Player/Body_Smile.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Player_IDLE"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1.5 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+loop = true
+step = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Left_LEG:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 80.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Right_LEG:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 31.6559
+height = 26.1066
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -62.638 ]
+}
+
+[node name="Left_LEG" type="Sprite" parent="."]
+position = Vector2( -1.17042, 23.8073 )
+rotation = 0.187924
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -15, -9 )
+
+[node name="Right_LEG" type="Sprite" parent="."]
+position = Vector2( -1.90735e-06, 26.528 )
+rotation = -0.187924
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -110, -9 )
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( 0, -0.448635 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/Player_IDLE = SubResource( 1 )
+anims/Player_Walk = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.340561, 6.93791 )
+shape = SubResource( 3 )
